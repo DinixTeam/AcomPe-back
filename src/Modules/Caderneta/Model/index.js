@@ -48,36 +48,24 @@ const CadernetaSchema = new mongoose.Schema(
     ],
     neonatal:[
         {
-            ortolani:[
-                {
-                    isPositive:{
-                        type: Boolean
-                    },
-                    conduct:{
-                        type: String
-                    }
-                },
-            ],
-            redReflection:[
-                {
-                    isNormal:{
-                        type: Boolean
-                    },
-                    conduct:{
-                        type: String
-                    }
-                },
-            ],
-            tootsy: [
-                {
-                    yesOrNo:{
-                        type: Boolean
-                    },
-                    madeAt:{
-                        type: Date
-                    }
-                },
-            ],
+            ortolaniIsPositive:{
+                type: Boolean
+            },
+            ortolaniConduct:{
+                type: String
+            },
+            redReflectionIsNormal:{
+                type: Boolean
+            },
+            redReflectionConduct:{
+                type: String
+            },
+            tootsyYesOrNo: {
+                type: Boolean
+            },
+            tootsyMadeAt:{
+                type: Date
+            },
         }
     ],
     results:[
@@ -95,32 +83,24 @@ const CadernetaSchema = new mongoose.Schema(
     ],
     others:[
         {
-            hearingScreening:[
-                {
-                    yesOrNo:{
-                        type: Boolean
-                    },
-                    madeAt:{
-                        type: Date
-                    }
-                }
-            ],
+            hearingScreeningYesOrNo: {
+                type: Boolean
+            },
+            hearingScreeningMadeAt:{
+                type: Date
+            },
             testPerformed:{
                 type: String
             },
-            result:[
-                {
-                    text1:{
-                        type: String
-                    },
-                    text2:{
-                        type: String
-                    },
-                    isNormal:{
-                        type: Boolean
-                    }
-                }
-            ],
+            resultText1:{
+                type: String
+            },
+            resultText2:{
+                type: String
+            },
+            resultIsNormal:{
+                type: Boolean
+            },
         }
     ],
     exitFeeding:{

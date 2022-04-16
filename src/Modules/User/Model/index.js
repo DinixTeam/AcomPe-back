@@ -49,19 +49,19 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    phone: {
+    phone:{
       type: String,
     },
-    Caderneta: [
-      {
+    caderneta:{
         type: mongoose.Schema.ObjectId,
         ref: 'Caderneta',
       },
-    ],
-    consultas:{
+    consultas:[
+      {
       type: mongoose.Schema.ObjectId,
         ref: 'Consulta',
     }
+  ],
   },
   {
     timestamps: {

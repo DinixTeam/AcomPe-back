@@ -8,7 +8,7 @@ const EmailInUse = require('../../Middlewares/emailInUse');
 routes.route('/login').post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      emailOrUsername: Joi.string().required(),
+      emailOrCPF: Joi.string().required(),
       password: Joi.string().required(),
     }),
   }),
@@ -21,13 +21,14 @@ routes
     celebrate({
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
-        username: Joi.string().required(),
+        parentName: Joi.string().required(),
         email: Joi.string().required().email(),
         password: Joi.string().required(),
-        phone: Joi.string().allow(null, '').max(500),
-        profession: Joi.string().allow(null, '').max(500),
-        find: Joi.string().allow(null, '').max(500),
-        interest: Joi.string().allow(null, '').max(500),
+        phone: Joi.string().required(),
+        cpf: Joi.string().required(),
+        rg: Joi.string().required(),
+        sex: Joi.string().required(),
+        bornDate: Joi.date().required(),
       }),
     }),
    
@@ -39,8 +40,7 @@ routes
       [Segments.BODY]: Joi.object().keys({
         name: Joi.string().allow(null, '').max(500),
         phone: Joi.string().allow(null, '').max(500),
-        find: Joi.string().allow(null, '').max(500),
-        interest: Joi.string().allow(null, '').max(500),
+        parentName: Joi.string().allow(null, '').max(500),
       }),
     }),
     UserAuth.verifyToken,
@@ -58,28 +58,6 @@ routes.route('/user/:_id').get(
 );
 
 routes.route('/users/read').get(Controller.read);
-
-routes.route('/user/changepass').put(
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      newpassword: Joi.string().required(),
-      password: Joi.string().required(),
-    }),
-  }),
-  UserAuth.verifyToken,
-  Controller.changePassword,
-);
-
-routes.route('/user/resetpassword').post(
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      newpassword: Joi.string().required(),
-      email: Joi.string().required().email(),
-      token: Joi.string().required(),
-    }),
-  }),
-  Controller.resetPassword,
-);
 
 routes.route('/users/:email').get(
   celebrate({

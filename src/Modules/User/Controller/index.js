@@ -138,84 +138,6 @@ async function remove(req, res) {
   }
 }
 
-async function changePassword(req, res) {
-  try {
-    const _id = req.userId;
-    const plainTextPassword = req.body.password;
-    const newPassword = req.body.newpassword;
-    const user = await User.findById(_id).select('+password');
-
-    async function match(plainTextPassword, hashedPassword) {
-      if (!plainTextPassword || !hashedPassword) {
-        return false;
-      }
-
-      return bcrypt.compare(plainTextPassword, hashedPassword);
-    }
-
-    const passwordMatch = await match(plainTextPassword, user?.password);
-
-    if (!passwordMatch) {
-      return res.status(400).json({ message: 'Senha incorreta' });
-    }
-
-    user.password = newPassword;
-    user.save();
-
-    return res.status(200).json("Senha modificada");
-  } catch({ message }) {
-    return res.status(500).json({ message });
-  }
-}
-
-async function resetPassword(req, res) {
-  try{
-    const {email, token, newpassword } = req.body;
-
-    const emailUser = await User.findOne({ email });
-
-    if(!emailUser){
-      return res
-      .status(404)
-      .json({ message: 'Esse email não foi encontrado!' });
-    } else{
-      const user = await User.findOne({ email })
-      .select("+passwordResetToken passwordResetExpires");
-
-      console.log(user.passwordResetToken)
-      console.log(token)
-  
-      if (!user) {
-        return res
-          .status(404)
-          .json({ message: 'Esse email não foi encontrado!' });
-      }
-  
-      if(token !== user.passwordResetToken){
-        return res
-          .status(402)
-          .json({ message: 'Esse código não foi encontrado!' });
-      }
-  
-      const now = new Date();
-  
-      if(now > user.passwordResetExpires){
-        return res
-          .status(401)
-          .json({ message: 'Token expirado' });
-      }
-  
-      user.password = newpassword;
-       user.save();
-       return res.status(200).json("Senha modificada");
-    }
-
-   
-  } catch({ message }) {
-    return res.status(500).json({ message });
-  }
-}
-
 module.exports = {
 
   create,
@@ -224,7 +146,5 @@ module.exports = {
   update,
   remove,
   readEmail,
-  changePassword,
-  resetPassword,
 
 };

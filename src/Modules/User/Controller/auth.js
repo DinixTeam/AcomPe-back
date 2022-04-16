@@ -5,18 +5,18 @@ const User = require('../Model');
 async function authenticate(req, res) {
   try {
     
-    const emailOrUsername = req.body.emailOrUsername;
+    const emailOrCPF = req.body.emailOrCPF;
     const plainTextPassword = req.body.password;
     var user;
 
-    user = await User.findOne({ username: emailOrUsername }).select('+password');
+    user = await User.findOne({ cpf: emailOrCPF }).select('+password');
 
     if(!user){
-      user = await User.findOne({ email: emailOrUsername }).select('+password');
+      user = await User.findOne({ email: emailOrCPF }).select('+password');
     }
 
     if (!user) {
-      return res.status(400).json({ message: 'Email ou usuario não cadastrado' });
+      return res.status(400).json({ message: 'Email ou cpf não cadastrado' });
     }
 
     if(user.verified == true){

@@ -36,7 +36,9 @@ async function create(req, res) {
 async function read(req, res) {
   try {
 
-    return res.status(200).send({});
+    const consult = await Consulta.find()
+
+    return res.status(200).send({consult});
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
