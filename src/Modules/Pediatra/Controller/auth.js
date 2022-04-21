@@ -1,25 +1,25 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User = require('../Model');
+const Pediatra = require('../Model');
 
 async function authenticate(req, res) {
   try {
     
     const emailOrCPF = req.body.emailOrCPF;
     const plainTextPassword = req.body.password;
-    var user;
+    var pediatra;
 
-    user = await User.findOne({ cpf: emailOrCPF }).select('+password');
+    pediatra = await Pediatra.findOne({ cpf: emailOrCPF }).select('+password');
 
-    if(!user){
-      user = await User.findOne({ email: emailOrCPF }).select('+password');
+    if(!pediatra){
+      pediatra = await Pediatra.findOne({ email: emailOrCPF }).select('+password');
     }
 
-    if (!user) {
+    if (!pediatra) {
       return res.status(400).json({ message: 'Email ou cpf não cadastrado' });
     }
 
-    if(user.verified == true){
+    if(pediatra.verified == true){
 
     async function match(plainTextPassword, hashedPassword) {
       if (!plainTextPassword || !hashedPassword) {
@@ -29,14 +29,14 @@ async function authenticate(req, res) {
       return bcrypt.compare(plainTextPassword, hashedPassword);
     }
 
-    const passwordMatch = await match(plainTextPassword, user?.password);
+    const passwordMatch = await match(plainTextPassword, pediatra?.password);
 
-    if (!user || !passwordMatch) {
+    if (!pediatra || !passwordMatch) {
       return res.status(400).json({ message: 'Email ou senha incorretos' });
     }
 
-    user.password = undefined;
-    const id = user._id;
+    pediatra.password = undefined;
+    const id = pediatra._id;
     const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: '1d' });
 
     return res.status(200).json({ token, _id: id, auth: true });
@@ -80,7 +80,7 @@ async function verifyToken(req, res, next) {
       return res.status(401).json({ message: 'Token inválido' });
     }
 
-    req.userId = decoded.id;
+    req.pediatraId = decoded.id;
 
     return next();
   } catch ({ message }) {

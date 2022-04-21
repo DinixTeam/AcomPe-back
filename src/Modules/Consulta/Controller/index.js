@@ -6,12 +6,18 @@ const path = require('path');
 
 
 const Consulta = require('../Model/index');
-const User = require('../../User/Model/index');
+const Patient = require('../../Patient/Model/index');
 
 async function create(req, res) {
   try {
 
-    const { consulta, weight, height, glicose, consultaDate, pacientSituation, patient } = req.body;
+    const { weight, height, glicose, consultaDate, pacientSituation, patientID, pediatraID } = req.body;
+
+    const patientConsult = await Patient.findById(patientID)
+
+    patientConsult.consultas.length
+
+    var consulta = patientConsult.consultas.length + 1;
 
     const consult = await Consulta.create({
       consulta: consulta,
@@ -20,10 +26,12 @@ async function create(req, res) {
       glicose : glicose,
       consultaDate: consultaDate,
       pacientSituation: pacientSituation,
+      patientOwner: patientID,
+      pediatraOwner: pediatraID,
     });
 
-    await User.findByIdAndUpdate(
-      { _id: patient },
+    await Patient.findByIdAndUpdate(
+      { _id: patientID },
       { $push: { consultas: consult._id } },
     );
 

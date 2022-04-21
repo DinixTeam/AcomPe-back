@@ -3,24 +3,16 @@ const nodemailer = require("nodemailer");
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-const User = require('../Model');
+const Pediatra = require('../Model');
 const Caderneta = require('../../Caderneta/Model/index');
 const Token = require('../Model/token');
 const crypto = require('crypto-js');
 
 async function create(req, res, next) {
 
-  const { name, parentName, cpf, rg, sex, bornDate, email, password, phone } = req.body;
+  try{
 
-  const validCPF = await User.find({ cpf: cpf })
-
-  if(validCPF.length == 0){
-
-  }else{
-    return res
-      .status(400)
-      .json({ message: `Esse cpf já está em uso!` });
-  }
+  const { username, email, password } = req.body;
 
   if (req.emailInUse) {
     return res
@@ -28,30 +20,27 @@ async function create(req, res, next) {
       .json({ message: `O email ${req.body.email} já está em uso!` });
   }
 
-  const user = await User.create({
-    name,
-    parentName,
-    cpf,
-    rg,
-    sex,
-    bornDate,
-    email,
+  const pediatra = await Pediatra.create({
+    username,
     password,
-    phone,
+    email,
   });
 
-  user.password = null;
+  pediatra.password = null;
 
-  return next();
+  return res.status(200).send('Pediatra Criado!');
+  } catch ({ message }) {
+    res.status(500).json({ message });
+  }
 }
 
 async function read(req, res) {
   try {
-    const users = await User.find()
+    const pediatra = await Pediatra.find()
       .sort('-createdAt')
       .select({ password: 0, _id: 0, __v: 0, createdAt: 0, updatedAt: 0 });
 
-    return res.status(200).send(users);
+    return res.status(200).send(pediatra);
   } catch ({ message }) {
     res.status(500).json({ message });
   }
@@ -61,7 +50,7 @@ async function readOne(req, res) {
   try {
     const { _id } = req.params;
 
-    const user = await User.findById({ _id }).select({
+    const pediatra = await Pediatra.findById({ _id }).select({
       password: 0,
       _id: 0,
       __v: 0,
@@ -69,11 +58,11 @@ async function readOne(req, res) {
       updatedAt: 0,
     });
 
-    if (!user) {
-      return res.status(404).send({ message: 'usuário não foi encontrado!' });
+    if (!pediatra) {
+      return res.status(404).send({ message: 'Pediatra não foi encontrado!' });
     }
 
-    return res.status(200).send(user);
+    return res.status(200).send(pediatra);
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
@@ -83,17 +72,17 @@ async function readEmail(req, res) {
   try {
     const { email } = req.params;
 
-    const user = await User.find({ email: email }).select({
+    const pediatra = await Pediatra.find({ email: email }).select({
       password: 0,
       __v: 0,
       createdAt: 0,
       updatedAt: 0,
     });
 
-    if (!user) {
-      return res.status(404).send({ message: 'usuário não foi encontrado!' });
+    if (!pediatra) {
+      return res.status(404).send({ message: 'Pediatra não foi encontrado!' });
     }
-    return res.status(200).send(user);
+    return res.status(200).send(pediatra);
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
@@ -101,20 +90,20 @@ async function readEmail(req, res) {
 
 async function update(req, res) {
   try {
-    const _id = req.userId;
+    const _id = req.pediatraId;
     const { body } = req;
 
-    const user = await User.findByIdAndUpdate({ _id }, body, { new: true });
+    const pediatra = await Pediatra.findByIdAndUpdate({ _id }, body, { new: true });
 
-    if (!user) {
+    if (!pediatra) {
       return res
         .status(404)
-        .json({ message: 'Esse usuário não foi encontrado!' });
+        .json({ message: 'Pediatra não foi encontrado!' });
     }
 
-    await user.save();
+    await pediatra.save();
 
-    return res.status(200).json({ message: 'Usuário atualizado' });
+    return res.status(200).json({ message: 'Pediatra atualizado' });
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
@@ -122,17 +111,17 @@ async function update(req, res) {
 
 async function remove(req, res) {
   try {
-    const _id = req.userId;
+    const _id = req.pediatraId;
 
-    const user = await User.findByIdAndDelete({ _id });
+    const pediatra = await Pediatra.findByIdAndDelete({ _id });
 
-    if (!user) {
+    if (!pediatra) {
       return res
         .status(404)
-        .json({ message: 'Esse usuário não foi encontrado!' });
+        .json({ message: 'Pediatra não foi encontrado!' });
     }
 
-    return res.status(200).send({ message: 'Usuário deletado' });
+    return res.status(200).send({ message: 'Pediatra deletado' });
   } catch ({ message }) {
     return res.status(500).json({ message });
   }

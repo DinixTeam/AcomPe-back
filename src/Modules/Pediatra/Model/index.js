@@ -2,30 +2,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 
-const UserSchema = new mongoose.Schema(
+const PediatraSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    parentName: {
+    username: {
       type: String,
       required: true,
     },
     cpf:{
-      type: String,
-      required: true
+      type: String
     },
     rg:{
-      type: String,
-      required: true
+      type: String
     },
     sex:{
-      type: String,
-      required: true
-    },
-    bornDate:{
-      type: Date,
+      type: String
     },
     password: {
       type: String,
@@ -52,16 +42,11 @@ const UserSchema = new mongoose.Schema(
     phone:{
       type: String,
     },
-    caderneta:{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Caderneta',
-      },
-    consultas:[
+    patients:[
       {
-      type: mongoose.Schema.ObjectId,
-        ref: 'Consulta',
-    }
-  ],
+        type: mongoose.SchemaTypes.ObjectId
+      }
+    ]
   },
   {
     timestamps: {
@@ -73,14 +58,14 @@ const UserSchema = new mongoose.Schema(
 
 const salt = 10;
 
-UserSchema.pre('save', async function crypt(next) {
+PediatraSchema.pre('save', async function crypt(next) {
   if (this.isModified('password')) {
     this.password = await this.encryptPassword(this.password);
   }
   return next();
 });
 
-UserSchema.pre('updateOne', async function recovery(next) {
+PediatraSchema.pre('updateOne', async function recovery(next) {
   if (this._update.password) {
     this._update.password = await this.schema.methods.encryptPassword(
       this._update.password,
@@ -89,7 +74,7 @@ UserSchema.pre('updateOne', async function recovery(next) {
   return next();
 });
 
-UserSchema.methods = {
+PediatraSchema.methods = {
   authenticate(password) {
     return bcrypt.compareSync(password, this.password);
   },
@@ -98,4 +83,4 @@ UserSchema.methods = {
   },
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Pediatra', PediatraSchema);

@@ -3,7 +3,8 @@ const cors = require('cors');
 const { errors } = require('celebrate');
 
 /* IMPORTING ROUTES */
-const userRoutes = require('./Modules/User/Routes');
+const pediatraRoutes = require('./Modules/Pediatra/Routes');
+const patientRoutes = require('./Modules/Patient/Routes');
 const cadernetaRoutes = require('./Modules/Caderneta/Routes');
 const consultaRoutes = require('./Modules/Consulta/Routes')
 
@@ -15,8 +16,9 @@ app.use(express.json());
 app.use(errors());
 
 /* ROUTES */
-app.use(userRoutes);
-//app.use(cadernetaRoutes);
-//app.use(consultaRoutes)
+app.use(pediatraRoutes);
+app.use(patientRoutes);
+app.use(cadernetaRoutes);
+app.use(consultaRoutes)
 
 module.exports = app;

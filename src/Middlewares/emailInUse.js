@@ -1,10 +1,10 @@
-const User = require('../Modules/User/Model/index');
+const Pediatra = require('../Modules/Pediatra/Model/index');
 
 async function emailInUse(req, res, next) {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const pediatra = await Pediatra.findOne({ email: req.body.email });
 
-    req.emailInUse = user !== null;
+    req.emailInUse = pediatra !== null;
 
     return next();
   } catch ({ message }) {

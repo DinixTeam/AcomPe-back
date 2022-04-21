@@ -21,6 +21,12 @@ const ConsultaSchema = new mongoose.Schema(
     },
     pacientSituation: {
         type: String
+    },
+    patientOwner:{
+      type: mongoose.SchemaTypes.ObjectId
+    },
+    pediatraOwner:{
+      type: mongoose.SchemaTypes.ObjectId
     }
   },
   {

@@ -6,7 +6,6 @@ const path = require('path');
 
 
 const Caderneta = require('../Model/index');
-const User = require('../../User/Model/index');
 
 async function create(req, res) {
   try {
