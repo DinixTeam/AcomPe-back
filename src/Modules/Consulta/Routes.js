@@ -16,7 +16,7 @@ routes.route('/consulta').post(
     }),
   }),
   Controller.create,
-)
+);
 
 routes.route('/consulta/read').get(Controller.read);
 

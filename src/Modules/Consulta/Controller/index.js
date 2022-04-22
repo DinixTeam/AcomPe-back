@@ -15,8 +15,6 @@ async function create(req, res) {
 
     const patientConsult = await Patient.findById(patientID)
 
-    patientConsult.consultas.length
-
     var consulta = patientConsult.consultas.length + 1;
 
     const consult = await Consulta.create({

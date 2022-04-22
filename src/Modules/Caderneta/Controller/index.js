@@ -6,13 +6,16 @@ const path = require('path');
 
 
 const Caderneta = require('../Model/index');
+const Patient = require('../../Patient/Model/index')
 
 async function create(req, res) {
   try {
 
-    const { patient } = req.body;
+    const { patientID } = req.body;
 
-    const { consulta, exitFeeding, importantInformations } = req.body;
+    const { pediatraID } = req.body;
+
+    const { exitFeeding, importantInformations } = req.body;
 
     const { bornHour, bornDate, sex, bornWeight, bblength, cephalic, gestationalAge, bloodType, exitWeight, exitDate, motherName  } = req.body;
 
@@ -23,9 +26,10 @@ async function create(req, res) {
     const { hearingScreeningYesOrNo, hearingScreeningMadeAt, testPerformed, resultText1, resultText2, resultIsNormal } = req.body;
 
     const caderneta = await Caderneta.create({
-      consulta: consulta,
       exitFeeding: exitFeeding,
       importantInformations : importantInformations,
+      patientOwner: patientID,
+      pediatraOwner: pediatraID,
     });
 
     caderneta.bornData.push({bornHour, bornDate, sex, bornWeight, bblength, cephalic, gestationalAge, bloodType, exitWeight, exitDate, motherName})
@@ -36,10 +40,12 @@ async function create(req, res) {
 
     caderneta.others.push({hearingScreeningYesOrNo, hearingScreeningMadeAt, testPerformed, resultText1, resultText2, resultIsNormal})
 
-    await User.findByIdAndUpdate(
-      { _id: patient },
-      { $set: { caderneta: caderneta._id } },
+    await Patient.findByIdAndUpdate(
+      { _id: patientID },
+      { $push: { caderneta: caderneta._id } },
     );
+
+    await caderneta.save();
 
     return res.status(201).send({ message: 'Caderneta criada' });
   } catch ({ message }) {

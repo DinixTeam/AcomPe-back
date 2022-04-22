@@ -6,7 +6,7 @@ const CadernetaSchema = new mongoose.Schema(
   {
     consulta: {
       type: Number,
-      default: 1
+      default: 0
     },
     bornData: [
         {
@@ -108,6 +108,12 @@ const CadernetaSchema = new mongoose.Schema(
     },
     importantInformations:{
         type: String
+    },
+    patientOwner:{
+        type: mongoose.SchemaTypes.ObjectId
+    },
+    pediatraOwner:{
+        type: mongoose.SchemaTypes.ObjectId
     }
   },
   {

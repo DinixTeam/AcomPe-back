@@ -8,8 +8,8 @@ routes
   .post(
     celebrate({
       [Segments.BODY]: Joi.object().keys({
-        patient: Joi.string().required(),
-        consulta: Joi.number().required(),
+        patientID: Joi.string().required(),
+        pediatraID: Joi.string().required(),
         exitFeeding: Joi.string().required(),
         importantInformations: Joi.string().required(),
         bornHour: Joi.string().required(),
