@@ -15,6 +15,6 @@
   },
   "scripts": {
     "back": "nodemon ./src/index.js",
-    "start": "nodemon ./src/index.js"
+    "start": "npm ./src/index.js"
   }
 }
