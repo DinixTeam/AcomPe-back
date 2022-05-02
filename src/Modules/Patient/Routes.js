@@ -3,15 +3,6 @@ const { celebrate, Joi, Segments } = require('celebrate');
 
 const Controller = require('./Controller');
 
-routes.route('/login').post(
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      cpf: Joi.string().required(),
-      password: Joi.string().required(),
-    }),
-  }),
-);
-
 routes.route('/patient').post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({

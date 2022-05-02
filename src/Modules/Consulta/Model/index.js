@@ -5,28 +5,36 @@ const mongoose = require('mongoose');
 const ConsultaSchema = new mongoose.Schema(
   {
     consulta: {
-        type: Number
+        type: Number,
+        required: true
     },
     weight: {
-        type: Number
+        type: Number,
+        required: true
     },
     height: {
-        type: Number
+        type: Number,
+        required: true
     },
     glicose: {
-        type: Number
+        type: Number,
+        required: true
     },
     consultaDate: {
-        type: Date
+        type: Date,
+        required: true
     },
     pacientSituation: {
-        type: String
+        type: String,
+        required: true
     },
     patientOwner:{
-      type: mongoose.SchemaTypes.ObjectId
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true
     },
     pediatraOwner:{
-      type: mongoose.SchemaTypes.ObjectId
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true
     }
   },
   {

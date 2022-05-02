@@ -1,12 +1,4 @@
-const generatePassword = require('generate-password');
-const nodemailer = require("nodemailer");
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path');
-const bcrypt = require('bcryptjs');
 const Pediatra = require('../Model');
-const Caderneta = require('../../Caderneta/Model/index');
-const Token = require('../Model/token');
-const crypto = require('crypto-js');
 
 async function create(req, res, next) {
 
@@ -68,26 +60,6 @@ async function readOne(req, res) {
   }
 }
 
-async function readEmail(req, res) {
-  try {
-    const { email } = req.params;
-
-    const pediatra = await Pediatra.find({ email: email }).select({
-      password: 0,
-      __v: 0,
-      createdAt: 0,
-      updatedAt: 0,
-    });
-
-    if (!pediatra) {
-      return res.status(404).send({ message: 'Pediatra não foi encontrado!' });
-    }
-    return res.status(200).send(pediatra);
-  } catch ({ message }) {
-    return res.status(500).json({ message });
-  }
-}
-
 async function update(req, res) {
   try {
     const _id = req.pediatraId;
@@ -134,6 +106,5 @@ module.exports = {
   readOne,
   update,
   remove,
-  readEmail,
 
 };

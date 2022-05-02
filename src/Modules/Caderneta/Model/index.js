@@ -11,37 +11,48 @@ const CadernetaSchema = new mongoose.Schema(
     bornData: [
         {
             bornHour: {
-                type: String
+                type: String,
+                required: true
             },
             bornDate:{
-                type: Date
+                type: Date,
+                required: true
             },
             sex:{
-                type: String
+                type: String,
+                required: true
             },
             bornWeight:{
-                type: Number
+                type: Number,
+                required: true
             },
             bblength:{
-                type: Number
+                type: Number,
+                required: true
             },
             cephalic:{
-                type: Number
+                type: Number,
+                required: true
             },
             gestationalAge:{
-                type: Number
+                type: Number,
+                required: true
             },
             bloodType:{
-                type: String
+                type: String,
+                required: true
             },
             exitWeight:{
-                type: Number
+                type: Number,
+                required: true
             },
             exitDate:{
-                type: Date
+                type: Date,
+                required: true
             },
             motherName:{
-                type: String
+                type: String,
+                required: true
             }
 
         }
@@ -49,71 +60,90 @@ const CadernetaSchema = new mongoose.Schema(
     neonatal:[
         {
             ortolaniIsPositive:{
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             ortolaniConduct:{
-                type: String
+                type: String,
+                required: true
             },
             redReflectionIsNormal:{
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             redReflectionConduct:{
-                type: String
+                type: String,
+                required: true
             },
             tootsyYesOrNo: {
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             tootsyMadeAt:{
-                type: Date
+                type: Date,
+                required: true
             },
         }
     ],
     results:[
         {
             feniceltonuriaIsNormal:{
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             hipotireodismoIsNormal:{
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             anemiaFalciformeIsNormal:{
-                type: Boolean
+                type: Boolean,
+                required: true
             }
         }
     ],
     others:[
         {
             hearingScreeningYesOrNo: {
-                type: Boolean
+                type: Boolean,
+                required: true
             },
             hearingScreeningMadeAt:{
-                type: Date
+                type: Date,
+                required: true
             },
             testPerformed:{
-                type: String
+                type: String,
+                required: true
             },
             resultText1:{
-                type: String
+                type: String,
+                required: true
             },
             resultText2:{
-                type: String
+                type: String,
+                required: true
             },
             resultIsNormal:{
-                type: Boolean
+                type: Boolean,
+                required: true
             },
         }
     ],
     exitFeeding:{
-        type: String
+        type: String,
+        required: true
     },
     importantInformations:{
-        type: String
+        type: String,
+        required: true
     },
     patientOwner:{
-        type: mongoose.SchemaTypes.ObjectId
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true
     },
     pediatraOwner:{
-        type: mongoose.SchemaTypes.ObjectId
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true
     }
   },
   {

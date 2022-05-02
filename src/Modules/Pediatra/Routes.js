@@ -49,13 +49,4 @@ routes.route('/pediatra/:_id').get(
 
 routes.route('/pediatra/read').get(Controller.read);
 
-routes.route('/pediatra/:email').get(
-  celebrate({
-    [Segments.PARAMS]: Joi.object().keys({
-      email: Joi.string().required(),
-    }),
-  }),
-  Controller.readEmail,
-);
-
 module.exports = routes;

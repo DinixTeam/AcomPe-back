@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-
 const PediatraSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
+      required: true
     },
     cpf:{
       type: String
@@ -32,8 +31,8 @@ const PediatraSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
       unique: true,
+      required: true
     },
     verified:{
       type: Boolean,
@@ -44,7 +43,8 @@ const PediatraSchema = new mongoose.Schema(
     },
     patients:[
       {
-        type: mongoose.SchemaTypes.ObjectId
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Patient'
       }
     ]
   },

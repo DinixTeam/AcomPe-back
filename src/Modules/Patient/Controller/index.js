@@ -1,14 +1,7 @@
-const generatePassword = require('generate-password');
-const nodemailer = require("nodemailer");
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path');
-const bcrypt = require('bcryptjs');
 const Patient = require('../Model');
 const Pediatra = require('../../Pediatra/Model/index');
-const Caderneta = require('../../Caderneta/Model/index');
-const crypto = require('crypto-js');
 
-async function create(req, res, next) {
+async function create(req, res) {
 
   try {
 

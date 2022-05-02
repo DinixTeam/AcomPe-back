@@ -25,15 +25,19 @@ const PatientSchema = new mongoose.Schema(
     },
     bornDate:{
       type: Date,
+      required: true
     },
     password: {
       type: String
     },
     phone:{
       type: String,
+      required: true
     },
     pediatraResponsavel:{
-      type: mongoose.SchemaTypes.ObjectId
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Pediatra',
+      required: true
     },
     caderneta:{
         type: mongoose.Schema.ObjectId,
