@@ -10,15 +10,18 @@ const consultaRoutes = require('./Modules/Consulta/Routes')
 
 const app = express();
 
+var fileupload = require('express-fileupload');
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(errors());
+app.use(fileupload());
 
 /* ROUTES */
 app.use(pediatraRoutes);
 app.use(patientRoutes);
 app.use(cadernetaRoutes);
-app.use(consultaRoutes)
+app.use(consultaRoutes);
 
 module.exports = app;

@@ -16,6 +16,7 @@ async function create(req, res, next) {
     username,
     password,
     email,
+    avatar : '',
   });
 
   pediatra.password = null;
@@ -99,6 +100,32 @@ async function remove(req, res) {
   }
 }
 
+async function uploadAvatar(req, res) {
+
+  try{
+  
+  const _id = req.params;
+  const file = req.files.photo;
+  file.mv('./uploads/' + file.name, function(err, result) {
+  if(err) 
+  throw err;
+  res.send({
+  success: true,
+  message: "File uploaded!"
+  });
+})
+
+  const pediatra = await Pediatra.findById(_id)
+
+  pediatra.avatar = file.name;
+
+  await pediatra.save();
+
+  }catch({ message }){
+    return res.status(500).json({ message });
+  }
+ }
+
 module.exports = {
 
   create,
@@ -106,5 +133,6 @@ module.exports = {
   readOne,
   update,
   remove,
+  uploadAvatar,
 
 };

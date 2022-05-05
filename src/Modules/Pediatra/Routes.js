@@ -49,4 +49,13 @@ routes.route('/pediatra/:_id').get(
 
 routes.route('/pediatra/read').get(Controller.read);
 
+routes.route('/upload/:_id').post(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      _id: Joi.string().required(),
+    }),
+  }),
+  Controller.uploadAvatar
+);
+
 module.exports = routes;
