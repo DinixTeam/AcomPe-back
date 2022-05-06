@@ -19,8 +19,6 @@ async function authenticate(req, res) {
       return res.status(400).json({ message: 'Email ou cpf não cadastrado' });
     }
 
-    if(pediatra.verified == true){
-
     async function match(plainTextPassword, hashedPassword) {
       if (!plainTextPassword || !hashedPassword) {
         return false;
@@ -40,9 +38,6 @@ async function authenticate(req, res) {
     const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: '1d' });
 
     return res.status(200).json({ token, _id: id, auth: true });
-  }else{
-    return res.status(403).json({ message: 'Email não verificado' });
-  }
   } catch ({ message }) {
     return res.status(500).json({ message });
   }

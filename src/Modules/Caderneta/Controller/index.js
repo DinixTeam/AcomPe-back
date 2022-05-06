@@ -53,10 +53,18 @@ async function create(req, res) {
   }
 }
 
-async function read(req, res) {
+async function readCadernetaFromPatient(req, res) {
   try {
 
-    const caderneta = await Caderneta.find()
+    const { patientID } = req.body
+
+    const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
+
+    if (!patientCaderneta) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado!' });
+    }
+
+    caderneta = patientCaderneta.caderneta
 
     return res.status(200).send({caderneta});
   } catch ({ message }) {
@@ -66,5 +74,5 @@ async function read(req, res) {
 
 module.exports = {
   create,
-  read,
+  readCadernetaFromPatient,
 };

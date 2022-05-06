@@ -34,12 +34,20 @@ async function create(req, res) {
   }
 }
 
-async function read(req, res) {
+async function readConsultsFromPatient(req, res) {
   try {
 
-    const consult = await Consulta.find()
+    const { patientID } = req.body
 
-    return res.status(200).send({consult});
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+
+    if (!patientConsults) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado!' });
+    }
+
+    consults = patientConsults.consultas
+
+    return res.status(200).send({consults});
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
@@ -47,5 +55,5 @@ async function read(req, res) {
 
 module.exports = {
   create,
-  read,
+  readConsultsFromPatient,
 };

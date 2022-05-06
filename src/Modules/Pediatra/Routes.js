@@ -47,6 +47,15 @@ routes.route('/pediatra/:_id').get(
   Controller.readOne,
 );
 
+routes.route('/pediatra/readpatients/:_id').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      _id: Joi.string().required(),
+    }),
+  }),
+  Controller.readPatients,
+);
+
 routes.route('/pediatra/read').get(Controller.read);
 
 routes.route('/upload/:_id').post(

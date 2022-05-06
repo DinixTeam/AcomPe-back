@@ -38,10 +38,6 @@ const PediatraSchema = new mongoose.Schema(
       unique: true,
       required: true
     },
-    verified:{
-      type: Boolean,
-      default: false,
-    },
     phone:{
       type: String,
     },

@@ -43,6 +43,13 @@ routes
     Controller.create,
   )
 
-routes.route('/caderneta/read').get(Controller.read);
+  routes.route('/caderneta/frompatient').get(
+    celebrate({
+      [Segments.BODY]: Joi.object().keys({
+        patientID: Joi.string().required(),
+      }),
+    }),
+    Controller.readCadernetaFromPatient,
+  );
 
 module.exports = routes;

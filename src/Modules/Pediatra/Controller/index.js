@@ -61,6 +61,24 @@ async function readOne(req, res) {
   }
 }
 
+async function readPatients(req, res) {
+  try {
+    const { _id } = req.params;
+
+    const pediatraPatients = await Pediatra.findById(_id).populate('patients')
+
+    if (!pediatraPatients) {
+      return res.status(404).send({ message: 'Pediatra não foi encontrado!' });
+    }
+
+    const patients = pediatraPatients.patients
+
+    return res.status(200).send(patients);
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
 async function update(req, res) {
   try {
     const _id = req.pediatraId;
@@ -134,5 +152,6 @@ module.exports = {
   update,
   remove,
   uploadAvatar,
+  readPatients,
 
 };

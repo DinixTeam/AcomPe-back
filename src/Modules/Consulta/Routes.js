@@ -18,6 +18,13 @@ routes.route('/consulta').post(
   Controller.create,
 );
 
-routes.route('/consulta/read').get(Controller.read);
+routes.route('/consulta/frompatient').get(
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.readConsultsFromPatient,
+);
 
 module.exports = routes;
