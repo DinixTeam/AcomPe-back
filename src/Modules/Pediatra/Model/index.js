@@ -22,8 +22,7 @@ const PediatraSchema = new mongoose.Schema(
       min: 8,
     },
     avatar: {
-      type: String,
-      required: true
+      type: String
     },
     passwordResetToken: {
       type: String,
