@@ -8,33 +8,59 @@ const ConsultaSchema = new mongoose.Schema(
         type: Number,
         required: true
     },
-    weight: {
-        type: Number,
-        required: true
+    perimetroCefalico: {
+      type: Number
     },
-    height: {
-        type: Number,
-        required: true
+    peso: {
+      type: Number
     },
-    glicose: {
-        type: Number,
-        required: true
+    comprimento: {
+      type: Number
     },
-    consultaDate: {
-        type: Date,
-        required: true
+    pezinho: {
+      type: Boolean
     },
-    pacientSituation: {
-        type: String,
-        required: true
+    orelhinha: {
+      type: Boolean
     },
-    patientOwner:{
-      type: mongoose.SchemaTypes.ObjectId,
-      required: true
+    olhinho: {
+      type: Boolean
     },
-    pediatraOwner:{
-      type: mongoose.SchemaTypes.ObjectId,
-      required: true
+    coracaozinho: {
+      type: Boolean
+    },
+    cotoUmbilical: {
+      type: Boolean
+    },
+    inctericia: {
+      type: Boolean
+    },
+    diarreiaVomito: {
+      type: Boolean
+    },
+    dificuldadeRespirar: {
+      type: Boolean
+    },
+    febre: {
+      type: Boolean
+    },
+    hipotermia: {
+      type: Boolean
+    },
+    convulsoesOuMovAnor: {
+      type: Boolean
+    },
+    auscultaCardiaca: {
+      type: Boolean
+    },
+    aberturaOcular: {
+      type: Boolean
+    },
+    pupilasNormais: {
+      type: Boolean
+    },
+    estrabismo: {
+      type: Boolean
     }
   },
   {

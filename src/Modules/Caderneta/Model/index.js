@@ -5,145 +5,59 @@ const mongoose = require('mongoose');
 const CadernetaSchema = new mongoose.Schema(
   {
     consulta: {
-      type: Number,
-      default: 0
+        type: Number,
+        default: 0
     },
-    bornData: [
-        {
-            bornHour: {
-                type: String,
-                required: true
-            },
-            bornDate:{
-                type: Date,
-                required: true
-            },
-            sex:{
-                type: String,
-                required: true
-            },
-            bornWeight:{
-                type: Number,
-                required: true
-            },
-            bblength:{
-                type: Number,
-                required: true
-            },
-            cephalic:{
-                type: Number,
-                required: true
-            },
-            gestationalAge:{
-                type: Number,
-                required: true
-            },
-            bloodType:{
-                type: String,
-                required: true
-            },
-            exitWeight:{
-                type: Number,
-                required: true
-            },
-            exitDate:{
-                type: Date,
-                required: true
-            },
-            motherName:{
-                type: String,
-                required: true
-            }
-
-        }
-    ],
-    neonatal:[
-        {
-            ortolaniIsPositive:{
-                type: Boolean,
-                required: true
-            },
-            ortolaniConduct:{
-                type: String,
-                required: true
-            },
-            redReflectionIsNormal:{
-                type: Boolean,
-                required: true
-            },
-            redReflectionConduct:{
-                type: String,
-                required: true
-            },
-            tootsyYesOrNo: {
-                type: Boolean,
-                required: true
-            },
-            tootsyMadeAt:{
-                type: Date,
-                required: true
-            },
-        }
-    ],
-    results:[
-        {
-            feniceltonuriaIsNormal:{
-                type: Boolean,
-                required: true
-            },
-            hipotireodismoIsNormal:{
-                type: Boolean,
-                required: true
-            },
-            anemiaFalciformeIsNormal:{
-                type: Boolean,
-                required: true
-            }
-        }
-    ],
-    others:[
-        {
-            hearingScreeningYesOrNo: {
-                type: Boolean,
-                required: true
-            },
-            hearingScreeningMadeAt:{
-                type: Date,
-                required: true
-            },
-            testPerformed:{
-                type: String,
-                required: true
-            },
-            resultText1:{
-                type: String,
-                required: true
-            },
-            resultText2:{
-                type: String,
-                required: true
-            },
-            resultIsNormal:{
-                type: Boolean,
-                required: true
-            },
-        }
-    ],
-    exitFeeding:{
-        type: String,
-        required: true
+    perimetroCefalico: {
+        type: Number
     },
-    importantInformations:{
-        type: String,
-        required: true
+    peso: {
+        type: Number
     },
-    patientOwner:{
-        type: mongoose.SchemaTypes.ObjectId,
-        required: true
+    comprimento: {
+        type: Number
     },
-    pediatraOwner:{
-        type: mongoose.SchemaTypes.ObjectId,
-        required: true
+    leiteLME: {
+        type: Boolean
+    },
+    leiteLMLA: {
+        type: Boolean
+    },
+    dificuldadeAmamentar: {
+        type: Boolean
+    },
+    parouAmamentar: {
+        type: Boolean
+    },
+    cotoUmbilical: {
+        type: Boolean
+    },
+    inctericia: {
+        type: Boolean
+    },
+    diarreiaVomito: {
+        type: Boolean
+    },
+    dificuldadeRespirar: {
+        type: Boolean
+    },
+    febre: {
+        type: Boolean
+    },
+    hipotermia: {
+        type: Boolean
+    },
+    convulsoesOuMovAnor: {
+        type: Boolean
+    },
+    auscultaCardiaca: {
+        type: Boolean
+    },
+    hepatiteB: {
+        type: Boolean
+    },
+    bcg: {
+        type: Boolean
     }
   },
   {
