@@ -61,6 +61,10 @@ const ConsultaSchema = new mongoose.Schema(
     },
     estrabismo: {
       type: Boolean
+    },
+    date: {
+      type: Date,
+      default: Date.now
     }
   },
   {

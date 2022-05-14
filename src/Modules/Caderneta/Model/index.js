@@ -54,6 +54,10 @@ const CadernetaSchema = new mongoose.Schema(
     },
     bcg: {
         type: Boolean
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
   },
   {
