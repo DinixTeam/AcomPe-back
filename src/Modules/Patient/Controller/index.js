@@ -141,6 +141,25 @@ async function remove(req, res) {
   }
 }
 
+async function readConsultsFromPatient(req, res) {
+  try {
+
+    const { patientID } = req.body
+
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+
+    if (!patientConsults) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado!' });
+    }
+
+    consults = patientConsults.consultas
+
+    return res.status(200).send({consults});
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
 module.exports = {
 
   create,
@@ -149,5 +168,6 @@ module.exports = {
   update,
   remove,
   readCPF,
+  readConsultsFromPatient,
 
 };

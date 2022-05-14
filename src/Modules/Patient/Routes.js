@@ -47,4 +47,13 @@ routes.route('/patient/:cpf').get(
   Controller.readCPF,
 );
 
+routes.route('/consulta/frompatient').get(
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.readConsultsFromPatient,
+);
+
 module.exports = routes;

@@ -2,7 +2,7 @@ require('dotenv').config();
 const { string } = require('joi');
 const mongoose = require('mongoose');
 
-const ConsultaSchema = new mongoose.Schema(
+const AtendimentoSchema = new mongoose.Schema(
   {
     consulta: {
         type: Number,
@@ -16,6 +16,18 @@ const ConsultaSchema = new mongoose.Schema(
     },
     comprimento: {
       type: Number
+    },
+    pezinho: {
+      type: Boolean
+    },
+    orelhinha: {
+      type: Boolean
+    },
+    olhinho: {
+      type: Boolean
+    },
+    coracaozinho: {
+      type: Boolean
     },
     cotoUmbilical: {
       type: Boolean
@@ -59,4 +71,4 @@ const ConsultaSchema = new mongoose.Schema(
   },
 );
 
-module.exports = mongoose.model('Consulta', ConsultaSchema);
+module.exports = mongoose.model('Atendimento', AtendimentoSchema);
