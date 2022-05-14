@@ -3,7 +3,7 @@ const { celebrate, Joi, Segments } = require('celebrate');
 
 const Controller = require('./Controller');
 
-routes.route('/consultafirst').post(
+routes.route('/atendimento').post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       perimetroCefalico: Joi.number().required(),

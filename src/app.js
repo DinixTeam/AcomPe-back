@@ -6,7 +6,8 @@ const { errors } = require('celebrate');
 const pediatraRoutes = require('./Modules/Pediatra/Routes');
 const patientRoutes = require('./Modules/Patient/Routes');
 const cadernetaRoutes = require('./Modules/Caderneta/Routes');
-const consultaRoutes = require('./Modules/Consulta/Routes')
+const consultaRoutes = require('./Modules/Consulta/Routes');
+const atendimentoRoutes = require('./Modules/Atendimento/Routes');
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(pediatraRoutes);
 app.use(patientRoutes);
 app.use(cadernetaRoutes);
 app.use(consultaRoutes);
+app.use(atendimentoRoutes);
 
 module.exports = app;

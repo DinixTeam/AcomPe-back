@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 
 const AtendimentoSchema = new mongoose.Schema(
   {
-    consulta: {
-        type: Number,
-        required: true
-    },
     perimetroCefalico: {
       type: Number
     },
