@@ -30,9 +30,9 @@ routes.route('/caderneta').post(
     Controller.create,
   )
 
-  routes.route('/caderneta/frompatient').get(
+  routes.route('/caderneta/frompatient/:patientID').get(
     celebrate({
-      [Segments.BODY]: Joi.object().keys({
+      [Segments.PARAMS]: Joi.object().keys({
         patientID: Joi.string().required(),
       }),
     }),

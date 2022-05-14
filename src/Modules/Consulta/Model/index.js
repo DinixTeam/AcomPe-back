@@ -17,6 +17,18 @@ const ConsultaSchema = new mongoose.Schema(
     comprimento: {
       type: Number
     },
+    leiteLME: {
+      type: Boolean
+    },
+    leiteLMLA: {
+      type: Boolean
+    },
+    dificuldadeAmamentar: {
+      type: Boolean
+    },
+    parouAmamentar: {
+      type: Boolean
+    },
     cotoUmbilical: {
       type: Boolean
     },

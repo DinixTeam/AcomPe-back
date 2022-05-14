@@ -144,7 +144,7 @@ async function remove(req, res) {
 async function readConsultsFromPatient(req, res) {
   try {
 
-    const { patientID } = req.body
+    const { patientID } = req.params
 
     const patientConsults = await Patient.findById(patientID).populate('consultas')
 

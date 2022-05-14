@@ -42,13 +42,17 @@ const PatientSchema = new mongoose.Schema(
     caderneta:{
         type: mongoose.Schema.ObjectId,
         ref: 'Caderneta',
-      },
+    },
+    atendimento:{
+      type: mongoose.Schema.ObjectId,
+      ref: 'Atendimento',
+    },
     consultas:[
       {
       type: mongoose.Schema.ObjectId,
-        ref: 'Consulta',
-    }
-  ],
+      ref: 'Consulta',
+      }
+    ],
   },
   {
     timestamps: {

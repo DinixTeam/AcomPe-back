@@ -51,7 +51,7 @@ async function create(req, res) {
 async function readCadernetaFromPatient(req, res) {
   try {
 
-    const { patientID } = req.body
+    const { patientID } = req.params;
 
     const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
 

@@ -6,21 +6,24 @@ const Patient = require('../../Patient/Model/index');
 async function createFirstMonth(req, res) {
   try {
 
-    const { perimetroCefalico, peso, comprimento, pezinho, orelhinha, olhinho, coracaozinho,
+    const { perimetroCefalico, peso, comprimento, leiteLME, leiteLMLA, dificuldadeAmamentar, parouAmamentar, pezinho, orelhinha, olhinho, coracaozinho,
       cotoUmbilical, inctericia, diarreiaVomito, dificuldadeRespirar, febre, hipotermia, convulsoesOuMovAnor,
       auscultaCardiaca, aberturaOcular, pupilasNormais, estrabismo, patientID, pediatraID } = req.body;
 
-    const patientConsult = await Patient.findById(patientID)
+    const patientAtendimento = await Patient.findById(patientID)
 
-    if(!patientConsult){
+    if(!patientAtendimento){
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
     const consult = await Atendimento.create({
-      consulta: 1,
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
+      leiteLME: leiteLME,
+      leiteLMLA: leiteLMLA,
+      dificuldadeAmamentar: dificuldadeAmamentar,
+      parouAmamentar: parouAmamentar,
       pezinho: pezinho,
       orelhinha: orelhinha,
       olhinho: olhinho,
@@ -51,6 +54,26 @@ async function createFirstMonth(req, res) {
   }
 }
 
+async function readAtendimentoFromPatient(req, res) {
+  try {
+
+    const { patientID } = req.params;
+
+    const patientAtendimento = await Patient.findById(patientID).populate('atendimento')
+
+    if (!patientAtendimento) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado!' });
+    }
+
+    var atendimento = patientAtendimento.atendimento
+
+    return res.status(200).send({atendimento});
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
 module.exports = {
     createFirstMonth,
+    readAtendimentoFromPatient
   };

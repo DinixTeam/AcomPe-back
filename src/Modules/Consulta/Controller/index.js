@@ -6,7 +6,7 @@ const Patient = require('../../Patient/Model/index');
 async function createOtherMonths(req, res) {
   try {
 
-    const { perimetroCefalico, peso, comprimento, cotoUmbilical, inctericia, diarreiaVomito,
+    const { perimetroCefalico, peso, comprimento, leiteLME, leiteLMLA, dificuldadeAmamentar, parouAmamentar, cotoUmbilical, inctericia, diarreiaVomito,
       dificuldadeRespirar, febre, hipotermia, convulsoesOuMovAnor,
       auscultaCardiaca, aberturaOcular, pupilasNormais, estrabismo, patientID, pediatraID } = req.body;
 
@@ -23,6 +23,10 @@ async function createOtherMonths(req, res) {
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
+      leiteLME: leiteLME,
+      leiteLMLA: leiteLMLA,
+      dificuldadeAmamentar: dificuldadeAmamentar,
+      parouAmamentar: parouAmamentar,
       cotoUmbilical: cotoUmbilical,
       inctericia: inctericia,
       diarreiaVomito: diarreiaVomito,

@@ -9,6 +9,10 @@ routes.route('/consultafirst').post(
       perimetroCefalico: Joi.number().required(),
       peso: Joi.number().required(),
       comprimento: Joi.number().required(),
+      leiteLME: Joi.boolean().required(),
+      leiteLMLA: Joi.boolean().required(),
+      dificuldadeAmamentar: Joi.boolean().required(),
+      parouAmamentar: Joi.boolean().required(),
       pezinho: Joi.boolean().required(),
       orelhinha: Joi.boolean().required(),
       olhinho: Joi.boolean().required(),
@@ -29,6 +33,15 @@ routes.route('/consultafirst').post(
     }),
   }),
   Controller.createFirstMonth,
+);
+
+routes.route('/atendimento/frompatient/:patientID').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.readAtendimentoFromPatient,
 );
 
 module.exports = routes;
