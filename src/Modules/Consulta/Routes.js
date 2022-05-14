@@ -3,12 +3,16 @@ const { celebrate, Joi, Segments } = require('celebrate');
 
 const Controller = require('./Controller');
 
-routes.route('/consultaothers').post(
+routes.route('/consulta').post(
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       perimetroCefalico: Joi.number().required(),
       peso: Joi.number().required(),
       comprimento: Joi.number().required(),
+      leiteLME: Joi.boolean().required(),
+      leiteLMLA: Joi.boolean().required(),
+      dificuldadeAmamentar: Joi.boolean().required(),
+      parouAmamentar: Joi.boolean().required(),
       cotoUmbilical: Joi.boolean().required(),
       inctericia: Joi.boolean().required(),
       diarreiaVomito: Joi.boolean().required(),
@@ -17,8 +21,9 @@ routes.route('/consultaothers').post(
       hipotermia: Joi.boolean().required(),
       convulsoesOuMovAnor: Joi.boolean().required(),
       auscultaCardiaca: Joi.boolean().required(),
-      hepatiteB: Joi.boolean().required(),
-      bcg: Joi.boolean().required(),
+      aberturaOcular: Joi.boolean().required(),
+      pupilasNormais: Joi.boolean().required(),
+      estrabismo: Joi.boolean().required(),
       patientID: Joi.string().required(),
       pediatraID: Joi.string().required(),
     }),
