@@ -16,6 +16,10 @@ async function createFirstMonth(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
+    if(patientAtendimento.atendimento.length != 0){
+      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+    }
+
     const atendi = await Atendimento.create({
       perimetroCefalico: perimetroCefalico,
       peso: peso,

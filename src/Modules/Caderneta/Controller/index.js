@@ -15,6 +15,16 @@ async function create(req, res) {
     cotoUmbilical, inctericia, diarreiaVomito, dificuldadeRespirar, febre, hipotermia, convulsoesOuMovAnor,
     auscultaCardiaca, hepatiteB, bcg, patientID, pediatraID } = req.body;
 
+    const patientCadernet = await Patient.findById(patientID)
+
+    if(!patientCadernet){
+      return res.status(404).send({ message: 'Paciente não foi encontrado!' });
+    }
+
+    if(patientCadernet.caderneta.length != 0){
+      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+    }
+
     const caderneta = await Caderneta.create({
       perimetroCefalico: perimetroCefalico,
       peso: peso,
