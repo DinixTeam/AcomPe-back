@@ -21,9 +21,9 @@ async function create(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    if(patientCadernet.caderneta != undefined){
-      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
-    }
+    // if(patientCadernet.caderneta != undefined){
+    //   return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+    // }
 
     const caderneta = await Caderneta.create({
       consulta: 1,
