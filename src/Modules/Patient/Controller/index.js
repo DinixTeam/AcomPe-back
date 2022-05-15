@@ -171,6 +171,8 @@ async function graphIdadePeso(req, res) {
 
     var graphArray = [];
 
+    graphArray.push(['Idade', 'Peso']);
+
     if (!patientCaderneta) {
       return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
     }
@@ -206,6 +208,8 @@ async function graphIdadeComprimento(req, res) {
     const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
 
     var graphArray = [];
+
+    graphArray.push(['Idade', 'Comprimento']);
 
     if (!patientCaderneta) {
       return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
@@ -243,6 +247,8 @@ async function graphIdadePerimetro(req, res) {
 
     var graphArray = [];
 
+    graphArray.push(['Idade', 'Perimetro Cefalico']);
+
     if (!patientCaderneta) {
       return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
     }
@@ -278,6 +284,7 @@ async function graphIdadeIMC(req, res) {
     const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
 
     var graphArray = [];
+    graphArray.push(['Idade', 'IMC']);
     var imc = 0;
 
     if (!patientCaderneta) {
