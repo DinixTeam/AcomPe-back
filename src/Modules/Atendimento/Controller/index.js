@@ -69,9 +69,7 @@ async function readAtendimentoFromPatient(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    var atendimento = patientAtendimento.atendimento
-
-    return res.status(200).send({atendimento});
+    return res.status(200).send(patientAtendimento.atendimento);
   } catch ({ message }) {
     return res.status(500).json({ message });
   }
