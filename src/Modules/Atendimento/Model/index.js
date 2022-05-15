@@ -4,9 +4,6 @@ const mongoose = require('mongoose');
 
 const AtendimentoSchema = new mongoose.Schema(
   {
-    consulta: {
-      type: Number
-    },
     perimetroCefalico: {
       type: Number
     },

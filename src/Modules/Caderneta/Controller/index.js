@@ -21,12 +21,11 @@ async function create(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    // if(patientCadernet.caderneta != undefined){
-    //   return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
-    // }
+    if(patientCadernet.caderneta != undefined){
+      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+    }
 
     const caderneta = await Caderneta.create({
-      consulta: 1,
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
@@ -50,7 +49,7 @@ async function create(req, res) {
 
     await Patient.findByIdAndUpdate(
       { _id: patientID },
-      { $push: { consultas: caderneta._id } },
+      { $push: { caderneta: caderneta._id } },
     );
 
     return res.status(201).send({ message: 'Caderneta criada' });
@@ -70,9 +69,7 @@ async function readCadernetaFromPatient(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    var caderneta = patientCaderneta.caderneta
-
-    return res.status(200).send({caderneta});
+    return res.status(200).send(patientCaderneta.caderneta);
   } catch ({ message }) {
     return res.status(500).json({ message });
   }

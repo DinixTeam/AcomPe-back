@@ -16,12 +16,11 @@ async function createFirstMonth(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    // if(patientAtendimento.atendimento != undefined){
-    //   return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
-    // }
+    if(patientAtendimento.atendimento != undefined){
+      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+    }
 
     const atendi = await Atendimento.create({
-      consulta: 2,
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
@@ -50,7 +49,7 @@ async function createFirstMonth(req, res) {
 
     await Patient.findByIdAndUpdate(
       { _id: patientID },
-      { $push: { consultas: atendi._id } },
+      { $push: { atendimento: atendi._id } },
     );
 
     return res.status(201).send({ message: 'Atendimento criado!' });
