@@ -26,6 +26,7 @@ async function create(req, res) {
     }
 
     const caderneta = await Caderneta.create({
+      consulta: 1,
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
@@ -49,7 +50,7 @@ async function create(req, res) {
 
     await Patient.findByIdAndUpdate(
       { _id: patientID },
-      { $push: { caderneta: caderneta._id } },
+      { $push: { consultas: caderneta._id } },
     );
 
     return res.status(201).send({ message: 'Caderneta criada' });

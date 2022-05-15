@@ -39,18 +39,17 @@ const PatientSchema = new mongoose.Schema(
       ref: 'Pediatra',
       required: true
     },
-    caderneta:{
-        type: mongoose.Schema.ObjectId,
-        ref: 'Caderneta',
-    },
-    atendimento:{
-      type: mongoose.Schema.ObjectId,
-      ref: 'Atendimento',
-    },
+    // caderneta:{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'Caderneta',
+    // },
+    // atendimento:{
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: 'Atendimento',
+    // },
     consultas:[
       {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Consulta',
+      type: mongoose.Schema.ObjectId
       }
     ],
   },

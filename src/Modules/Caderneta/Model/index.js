@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 
 const CadernetaSchema = new mongoose.Schema(
   {
+    consulta: {
+        type: Number
+    },
     perimetroCefalico: {
         type: Number
     },

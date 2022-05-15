@@ -21,6 +21,7 @@ async function createFirstMonth(req, res) {
     }
 
     const atendi = await Atendimento.create({
+      consulta: 2,
       perimetroCefalico: perimetroCefalico,
       peso: peso,
       comprimento: comprimento,
@@ -49,7 +50,7 @@ async function createFirstMonth(req, res) {
 
     await Patient.findByIdAndUpdate(
       { _id: patientID },
-      { $push: { atendimento: atendi._id } },
+      { $push: { consultas: atendi._id } },
     );
 
     return res.status(201).send({ message: 'Atendimento criado!' });
