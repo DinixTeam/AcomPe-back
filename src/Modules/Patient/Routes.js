@@ -56,4 +56,40 @@ routes.route('/consulta/frompatient/:patientID').get(
   Controller.readConsultsFromPatient,
 );
 
+routes.route('/graphidadepeso/:patientID').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.graphIdadePeso,
+);
+
+routes.route('/graphidadecomprimento/:patientID').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.graphIdadeComprimento,
+);
+
+routes.route('/graphidadeperimetro/:patientID').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.graphIdadePerimetro,
+);
+
+routes.route('/graphidadeimc/:patientID').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+    }),
+  }),
+  Controller.graphIdadeIMC,
+);
+
 module.exports = routes;

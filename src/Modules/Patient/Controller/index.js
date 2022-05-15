@@ -160,6 +160,155 @@ async function readConsultsFromPatient(req, res) {
   }
 }
 
+async function graphIdadePeso(req, res) {
+  try {
+
+    const { patientID } = req.params
+
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+    const patientAtendimento = await Patient.findById(patientID).populate('atendimento')
+    const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
+
+    var graphArray = [];
+
+    if (!patientCaderneta) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
+    }
+
+    graphArray.push(['1/4', patientCaderneta.caderneta.peso]);
+
+    if(patientAtendimento.atendimento.peso == undefined){
+      return res.status(200).send(graphArray);
+    }else{
+      graphArray.push(['1', patientAtendimento.atendimento.peso]);
+    }
+    if(patientConsults.consultas.length == 0){
+      return res.status(200).send(graphArray);
+    }else{
+      for(var i = 0; i < patientConsults.consultas.length; i++){
+        graphArray.push([`${(patientConsults.consultas[i].consulta - 1)}`, patientConsults.consultas[i].peso])
+      }
+    }
+
+    return res.status(200).send(graphArray);
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
+async function graphIdadeComprimento(req, res) {
+  try {
+
+    const { patientID } = req.params
+
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+    const patientAtendimento = await Patient.findById(patientID).populate('atendimento')
+    const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
+
+    var graphArray = [];
+
+    if (!patientCaderneta) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
+    }
+
+    graphArray.push(['1/4', patientCaderneta.caderneta.comprimento]);
+
+    if(patientAtendimento.atendimento.comprimento == undefined){
+      return res.status(200).send(graphArray);
+    }else{
+      graphArray.push(['1', patientAtendimento.atendimento.comprimento]);
+    }
+    if(patientConsults.consultas.length == 0){
+      return res.status(200).send(graphArray);
+    }else{
+      for(var i = 0; i < patientConsults.consultas.length; i++){
+        graphArray.push([`${(patientConsults.consultas[i].consulta - 1)}`, patientConsults.consultas[i].comprimento])
+      }
+    }
+
+    return res.status(200).send(graphArray);
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
+async function graphIdadePerimetro(req, res) {
+  try {
+
+    const { patientID } = req.params
+
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+    const patientAtendimento = await Patient.findById(patientID).populate('atendimento')
+    const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
+
+    var graphArray = [];
+
+    if (!patientCaderneta) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
+    }
+
+    graphArray.push(['1/4', patientCaderneta.caderneta.perimetroCefalico]);
+
+    if(patientAtendimento.atendimento.perimetroCefalico == undefined){
+      return res.status(200).send(graphArray);
+    }else{
+      graphArray.push(['1', patientAtendimento.atendimento.perimetroCefalico]);
+    }
+    if(patientConsults.consultas.length == 0){
+      return res.status(200).send(graphArray);
+    }else{
+      for(var i = 0; i < patientConsults.consultas.length; i++){
+        graphArray.push([`${(patientConsults.consultas[i].consulta - 1)}`, patientConsults.consultas[i].perimetroCefalico])
+      }
+    }
+
+    return res.status(200).send(graphArray);
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
+async function graphIdadeIMC(req, res) {
+  try {
+
+    const { patientID } = req.params
+
+    const patientConsults = await Patient.findById(patientID).populate('consultas')
+    const patientAtendimento = await Patient.findById(patientID).populate('atendimento')
+    const patientCaderneta = await Patient.findById(patientID).populate('caderneta')
+
+    var graphArray = [];
+    var imc = 0;
+
+    if (!patientCaderneta) {
+      return res.status(404).send({ message: 'Paciente não foi encontrado ou ainda nao fez a primeira consulta!' });
+    }
+
+    imc = (patientCaderneta.caderneta.peso/Math.pow((patientCaderneta.caderneta.comprimento/100), 2))
+
+    graphArray.push(['1/4', imc]);
+
+    if(patientAtendimento.atendimento.peso == undefined){
+      return res.status(200).send(graphArray);
+    }else{
+      imc = (patientAtendimento.atendimento.peso/Math.pow((patientAtendimento.atendimento.comprimento/100), 2))
+      graphArray.push(['1', imc]);
+    }
+    if(patientConsults.consultas.length == 0){
+      return res.status(200).send(graphArray);
+    }else{
+      for(var i = 0; i < patientConsults.consultas.length; i++){
+        imc = (patientConsults.consultas[i].peso/Math.pow((patientConsults.consultas[i].comprimento/100), 2))
+        graphArray.push([`${(patientConsults.consultas[i].consulta - 1)}`, imc])
+      }
+    }
+
+    return res.status(200).send(graphArray);
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
 module.exports = {
 
   create,
@@ -169,5 +318,9 @@ module.exports = {
   remove,
   readCPF,
   readConsultsFromPatient,
+  graphIdadePeso,
+  graphIdadeComprimento,
+  graphIdadePerimetro,
+  graphIdadeIMC,
 
 };
