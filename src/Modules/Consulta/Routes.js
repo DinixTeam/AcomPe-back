@@ -31,4 +31,14 @@ routes.route('/consulta').post(
   Controller.createOtherMonths,
 );
 
+routes.route('/consulta/findOne/:patientID/:nConsulta').get(
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      patientID: Joi.string().required(),
+      nConsulta: Joi.number().required(),
+    }),
+  }),
+  Controller.readOne,
+);
+
 module.exports = routes;

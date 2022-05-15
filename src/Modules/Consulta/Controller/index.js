@@ -16,7 +16,7 @@ async function createOtherMonths(req, res) {
       return res.status(404).send({ message: 'Paciente não foi encontrado!' });
     }
 
-    var consulta = patientConsult.consultas.length + 1;
+    var consulta = patientConsult.consultas.length + 3;
 
     const consult = await Consulta.create({
       consulta: consulta,
@@ -53,6 +53,27 @@ async function createOtherMonths(req, res) {
   }
 }
 
+async function readOne(req, res) {
+  try {
+
+    const { patientID } = req.params;
+    const { nConsulta } = req.params;
+
+    const patientConsult = await Patient.findById(patientID).populate('consultas')
+
+    for(var i = 0; i < patientConsult.consultas.length; i++){
+      if(patientConsult.consultas[i].consulta == nConsulta){
+        return res.status(201).send(patientConsult.consultas[i]);
+      }
+    }
+
+    return res.status(404).send({ message: 'Consulta nao encontrada!' });
+  } catch ({ message }) {
+    return res.status(500).json({ message });
+  }
+}
+
 module.exports = {
   createOtherMonths,
+  readOne,
 };
