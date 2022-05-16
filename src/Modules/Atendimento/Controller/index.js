@@ -17,7 +17,7 @@ async function createFirstMonth(req, res) {
     }
 
     if(patientAtendimento.atendimento != undefined){
-      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+      return res.status(409).send({ message: 'Consulta ja realizada!' });
     }
 
     const atendi = await Atendimento.create({

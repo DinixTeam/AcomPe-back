@@ -22,7 +22,7 @@ async function create(req, res) {
     }
 
     if(patientCadernet.caderneta != undefined){
-      return res.status(409).send({ message: 'Nao e possivel realizar tal acao!' });
+      return res.status(409).send({ message: 'Consulta ja realizada!' });
     }
 
     const caderneta = await Caderneta.create({
